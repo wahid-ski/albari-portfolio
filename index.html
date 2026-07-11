@@ -26,7 +26,7 @@
       --font-display: Georgia, "Times New Roman", serif;
       --font-body: Inter, system-ui, sans-serif;
       --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
-      --text-xs: 12px;
+      --text-xs: 13px;
       --text-sm: 14px;
       --text-base: 17px;
       --text-lg: 20px;
@@ -123,7 +123,7 @@
       list-style: none;
     }
     .nav-links a {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -133,6 +133,37 @@
     .nav-links a:hover {
       color: var(--accent);
       text-decoration: none;
+    }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-toggle-bar {
+      width: 18px;
+      height: 2px;
+      background: var(--fg);
+      border-radius: 2px;
+      transition: transform var(--motion-fast) var(--ease-standard), opacity var(--motion-fast) var(--ease-standard);
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
     }
 
     /* ─── HERO ─── */
@@ -314,7 +345,7 @@
     }
     .project-tag {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--accent);
@@ -336,7 +367,7 @@
     }
     .project-tech span {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       padding: 4px 12px;
       background: var(--bg);
@@ -368,7 +399,7 @@
     }
     .exp-date {
       font-family: var(--font-mono);
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
     }
     .exp-company {
@@ -467,7 +498,7 @@
     }
     .video-cv-placeholder .hint {
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       opacity: 0.6;
       letter-spacing: 0.04em;
@@ -492,7 +523,7 @@
     }
     .contact-item .label {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
@@ -519,7 +550,7 @@
       margin-top: var(--section-y-desktop);
     }
     .footer p {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
       letter-spacing: 0.02em;
     }
@@ -539,11 +570,38 @@
         --section-y-desktop: 80px;
         --section-y-tablet: 64px;
       }
+      .nav-toggle {
+        display: flex;
+      }
       .nav-links {
-        gap: var(--space-4);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border-soft);
+        box-shadow: var(--elev-raised);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height var(--motion-base) var(--ease-standard), opacity var(--motion-base) var(--ease-standard);
+      }
+      .nav-links.nav-open {
+        max-height: 420px;
+        opacity: 1;
+      }
+      .nav-links li {
+        width: 100%;
+      }
+      .nav-links li + li {
+        border-top: 1px solid var(--border-soft);
       }
       .nav-links a {
-        font-size: 12px;
+        display: block;
+        padding: 14px var(--container-gutter-phone);
+        font-size: 14px;
       }
       .hero {
         padding: 64px 0 48px;
@@ -638,6 +696,11 @@
         <li><a href="#video-cv">Video CV</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleNav()">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
     </div>
   </nav>
 
@@ -650,8 +713,9 @@
           <h1>Albari Yasir<br>Wahid</h1>
           <p class="hero-sub">Software engineer focused on Python, Flutter, and full-stack development. Building clean, practical tools — from e-commerce storefronts to inventory systems and drone firmware.</p>
           <div class="hero-links">
-            <a href="#video-cv" class="btn btn-primary">Watch Video CV</a>
+            <a href="CV_Albari_Yasir_Wahid.pdf" download class="btn btn-primary">Download CV</a>
             <a href="#projects" class="btn">View Projects</a>
+            <a href="#video-cv" class="btn">Watch Video CV</a>
             <a href="https://github.com/wahid-ski" target="_blank" rel="noopener" class="btn">GitHub</a>
           </div>
         </div>
@@ -886,6 +950,21 @@
       fallback.textContent = 'AW';
       img.replaceWith(fallback);
     }
+
+    function toggleNav() {
+      const btn = document.getElementById('navToggle');
+      const links = document.querySelector('.nav-links');
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      links.classList.toggle('nav-open', !isOpen);
+    }
+
+    document.querySelectorAll('.nav-links a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navToggle').setAttribute('aria-expanded', 'false');
+        document.querySelector('.nav-links').classList.remove('nav-open');
+      });
+    });
   </script>
 </body>
 </html>
