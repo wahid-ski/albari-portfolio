@@ -1,0 +1,891 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Albari Yasir Wahid — ePortfolio</title>
+  <style>
+    :root {
+      --bg: #fbf6ee;
+      --surface: #fffdf8;
+      --surface-warm: #f1e3cf;
+      --fg: #201914;
+      --fg-2: #4c4037;
+      --muted: #7a6d63;
+      --meta: #9b5b32;
+      --border: #ded2c3;
+      --border-soft: #eee4d7;
+      --accent: #9b5b32;
+      --accent-on: #ffffff;
+      --accent-hover: color-mix(in oklab, var(--accent), black 8%);
+      --accent-active: color-mix(in oklab, var(--accent), black 14%);
+      --success: #4f8a4f;
+      --warn: #c9822f;
+      --danger: #b33a3a;
+      --font-display: Georgia, "Times New Roman", serif;
+      --font-body: Inter, system-ui, sans-serif;
+      --font-mono: "SF Mono", ui-monospace, Menlo, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 17px;
+      --text-lg: 20px;
+      --text-xl: 28px;
+      --text-2xl: 42px;
+      --text-3xl: 64px;
+      --text-4xl: 88px;
+      --leading-body: 1.62;
+      --leading-tight: 1;
+      --tracking-display: -0.025em;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 112px;
+      --section-y-tablet: 80px;
+      --section-y-phone: 56px;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 9999px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: 0 20px 52px rgba(32, 25, 20, 0.12);
+      --focus-ring: 0 0 0 4px rgba(155, 91, 50, 0.24);
+      --motion-fast: 150ms;
+      --motion-base: 240ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --container-max: 1180px;
+      --container-gutter-desktop: 36px;
+      --container-gutter-tablet: 24px;
+      --container-gutter-phone: 16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font: var(--text-base)/var(--leading-body) var(--font-body);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+    a:hover { color: var(--accent-hover); }
+
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter-desktop);
+    }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(251, 246, 238, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .nav-inner {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 18px var(--container-gutter-desktop);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: var(--tracking-display);
+      color: var(--fg);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: var(--section-y-desktop) 0;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-12);
+      align-items: center;
+    }
+    .hero-photo {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      box-shadow: 0 12px 40px rgba(32, 25, 20, 0.12);
+    }
+    .hero-photo-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-warm);
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 88px;
+      font-weight: 700;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--space-5);
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(42px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-display);
+      line-height: var(--leading-tight);
+      color: var(--fg);
+      margin-bottom: var(--space-6);
+    }
+    .hero-sub {
+      font-size: var(--text-lg);
+      color: var(--fg-2);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: var(--space-8);
+    }
+    .hero-links {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      color: var(--fg);
+      background: transparent;
+      cursor: pointer;
+      transition: all var(--motion-fast) var(--ease-standard);
+      text-decoration: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--accent-on);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: var(--accent-on);
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: var(--section-y-desktop) 0;
+    }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: var(--space-4);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: var(--tracking-display);
+      color: var(--fg);
+      margin-bottom: var(--space-6);
+    }
+    .section-body {
+      color: var(--fg-2);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      max-width: 620px;
+    }
+    .section-body p + p {
+      margin-top: var(--space-4);
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+    }
+    .skill-group h3 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--fg);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-group ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .skill-group li {
+      font-size: 15px;
+      color: var(--fg-2);
+      padding: var(--space-2) 0;
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+    }
+    .project-card {
+      padding: var(--space-8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition: border-color var(--motion-base) var(--ease-standard), box-shadow var(--motion-base) var(--ease-standard);
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--elev-raised);
+    }
+    .project-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .project-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+    .project-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 3px 10px;
+      border: 1px solid color-mix(in oklab, var(--accent), transparent 70%);
+      border-radius: var(--radius-pill);
+      background: color-mix(in oklab, var(--accent), transparent 92%);
+    }
+    .project-desc {
+      font-size: 15px;
+      color: var(--fg-2);
+      line-height: 1.65;
+      margin-bottom: var(--space-5);
+    }
+    .project-tech {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+    .project-tech span {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      padding: 4px 12px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-card {
+      padding: var(--space-8);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      margin-top: var(--space-8);
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+    .exp-card h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+    }
+    .exp-date {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .exp-company {
+      font-size: 15px;
+      color: var(--accent);
+      margin-bottom: var(--space-5);
+      font-weight: 500;
+    }
+    .exp-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .exp-card li {
+      font-size: 15px;
+      color: var(--fg-2);
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .exp-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-list {
+      margin-top: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .edu-item {
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .edu-item h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: var(--space-1);
+    }
+    .edu-meta {
+      font-size: 15px;
+      color: var(--fg-2);
+    }
+    .edu-gpa {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--accent);
+      margin-top: var(--space-1);
+      font-weight: 500;
+    }
+
+    /* ─── VIDEO CV ─── */
+    .video-cv {
+      margin-top: var(--space-8);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .video-cv-placeholder {
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-warm);
+      color: var(--muted);
+      gap: var(--space-4);
+    }
+    .video-cv-placeholder svg {
+      width: 56px;
+      height: 56px;
+      opacity: 0.5;
+    }
+    .video-cv-placeholder p {
+      font-size: 15px;
+      color: var(--muted);
+      text-align: center;
+      max-width: 360px;
+      line-height: 1.5;
+    }
+    .video-cv-placeholder .hint {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.6;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+    .contact-item {
+      padding: var(--space-6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition: border-color var(--motion-base) var(--ease-standard);
+    }
+    .contact-item:hover {
+      border-color: var(--accent);
+    }
+    .contact-item .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-2);
+    }
+    .contact-item .value {
+      font-size: 15px;
+      color: var(--fg);
+      font-weight: 500;
+      word-break: break-all;
+    }
+    .contact-item .value a {
+      color: var(--fg);
+    }
+    .contact-item .value a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: var(--space-12) 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: var(--section-y-desktop);
+    }
+    .footer p {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --section-y-desktop: 80px;
+        --section-y-tablet: 64px;
+      }
+      .nav-links {
+        gap: var(--space-4);
+      }
+      .nav-links a {
+        font-size: 12px;
+      }
+      .hero {
+        padding: 64px 0 48px;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-photo {
+        width: 200px;
+        height: 200px;
+        order: -1;
+        margin: 0 auto var(--space-6);
+      }
+      .hero h1 {
+        font-size: clamp(36px, 8vw, 48px);
+      }
+      .hero-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-links {
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-links .btn {
+        text-align: center;
+        justify-content: center;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+      }
+      .project-card {
+        padding: var(--space-6);
+      }
+      .exp-header {
+        flex-direction: column;
+      }
+      .exp-card {
+        padding: var(--space-6);
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --section-y-desktop: 56px;
+        --section-y-tablet: 48px;
+      }
+      .nav-inner {
+        padding: 14px var(--container-gutter-phone);
+      }
+      .nav-links {
+        gap: var(--space-3);
+      }
+      .hero-photo {
+        width: 160px;
+        height: 160px;
+      }
+      .container {
+        padding: 0 var(--container-gutter-phone);
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .project-card {
+        padding: var(--space-5);
+      }
+      .project-header {
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .exp-card {
+        padding: var(--space-5);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <span class="nav-name">A.Y. Wahid</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#video-cv">Video CV</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <p class="hero-eyebrow">B.Sc. CSE · AIUB</p>
+          <h1>Albari Yasir<br>Wahid</h1>
+          <p class="hero-sub">Software engineer focused on Python, Flutter, and full-stack development. Building clean, practical tools — from e-commerce storefronts to inventory systems and drone firmware.</p>
+          <div class="hero-links">
+            <a href="#video-cv" class="btn btn-primary">Watch Video CV</a>
+            <a href="#projects" class="btn">View Projects</a>
+            <a href="https://github.com/wahid-ski" target="_blank" rel="noopener" class="btn">GitHub</a>
+          </div>
+        </div>
+        <img src="photo.jpg" alt="Albari Yasir Wahid" class="hero-photo" onerror="handlePhotoError(this)" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about" class="section">
+    <div class="container">
+      <p class="section-label">About</p>
+      <h2 class="section-title">Background</h2>
+      <div class="section-body">
+        <p>Motivated and detail-oriented Computer Science and Engineering graduate with a solid foundation in Python, web development, and relational databases. A clear communicator and quick learner who works well in a team, with a particular interest in growing into Odoo ERP development.</p>
+        <p>Comfortable taking ownership of small features end-to-end, from database design through to a working interface. Experienced in building full-stack applications — from Flutter web frontends to Django REST backends — and deploying them on production infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SKILLS ─── -->
+  <section id="skills" class="section">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">Technical Toolkit</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <ul>
+            <li>Python</li>
+            <li>JavaScript / TypeScript</li>
+            <li>Dart</li>
+            <li>C / C++</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Web</h3>
+          <ul>
+            <li>HTML5 &amp; SCSS</li>
+            <li>Bootstrap</li>
+            <li>REST APIs</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Frameworks</h3>
+          <ul>
+            <li>Flutter</li>
+            <li>Django</li>
+            <li>Flask</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Databases</h3>
+          <ul>
+            <li>PostgreSQL</li>
+            <li>MySQL</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <ul>
+            <li>Git &amp; GitHub</li>
+            <li>Docker</li>
+            <li>VS Code</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Spoken Languages</h3>
+          <ul>
+            <li>English (fluent)</li>
+            <li>Bengali (fluent)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROJECTS ─── -->
+  <section id="projects" class="section">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="projects-list">
+        <article class="project-card">
+          <div class="project-header">
+            <h3>Jersey Storefront</h3>
+            <span class="project-tag">Flutter Web + Django</span>
+          </div>
+          <p class="project-desc">Full e-commerce storefront for a jersey-import business. Django REST backend with Flutter Web frontend, PostgreSQL on Neon.tech, Cloudinary for media. WhatsApp-based order flow suited to the Bangladeshi market. Deployed on free-tier infrastructure (Firebase Hosting, PythonAnywhere).</p>
+          <div class="project-tech">
+            <span>Flutter</span>
+            <span>Django</span>
+            <span>PostgreSQL</span>
+            <span>Cloudinary</span>
+            <span>Firebase Hosting</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h3>Inventory Management System</h3>
+            <span class="project-tag">Final Year Project</span>
+          </div>
+          <p class="project-desc">Web-based inventory tracking application exposing RESTful APIs. Implemented user authentication, CRUD operations, and role-based access control for a complete inventory management workflow.</p>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>Flask</span>
+            <span>MySQL</span>
+            <span>REST API</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <h3>Personal Portfolio &amp; To-Do App</h3>
+            <span class="project-tag">Frontend</span>
+          </div>
+          <p class="project-desc">Responsive portfolio site and a to-do list app built with vanilla JavaScript and the Fetch API. Deployed via GitHub Pages.</p>
+          <div class="project-tech">
+            <span>HTML5</span>
+            <span>SCSS</span>
+            <span>JavaScript</span>
+            <span>GitHub Pages</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EXPERIENCE ─── -->
+  <section id="experience" class="section">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Work History</h2>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <h3>Junior Developer Intern</h3>
+            <p class="exp-company">CodeNest Technologies Ltd.</p>
+          </div>
+          <span class="exp-date">Mar 2026 – Jun 2026</span>
+        </div>
+        <ul>
+          <li>Assisted the backend team in debugging and maintaining Django-based web applications.</li>
+          <li>Built and styled a Bootstrap-based analytics dashboard using HTML5, SCSS, and JavaScript.</li>
+          <li>Wrote and optimized SQL queries in a MySQL database supporting internal reporting tools.</li>
+          <li>Collaborated using Git and GitHub, following branch-based workflows and peer code reviews.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EDUCATION ─── -->
+  <section id="education" class="section">
+    <div class="container">
+      <p class="section-label">Education</p>
+      <h2 class="section-title">Academic Background</h2>
+      <div class="edu-list">
+        <div class="edu-item">
+          <h3>B.Sc. in Computer Science and Engineering</h3>
+          <p class="edu-meta">American International University-Bangladesh (AIUB) · 2022 – 2026</p>
+          <p class="edu-gpa">CGPA: 3.70 / 4.00</p>
+        </div>
+        <div class="edu-item">
+          <h3>Higher Secondary Certificate (Science)</h3>
+          <p class="edu-meta">Milestone College, Dhaka · 2022</p>
+          <p class="edu-gpa">GPA: 5.00 / 5.00</p>
+        </div>
+        <div class="edu-item">
+          <h3>Secondary School Certificate (Science)</h3>
+          <p class="edu-meta">Police Lines Academy, Dhaka · 2020</p>
+          <p class="edu-gpa">GPA: 4.70 / 5.00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VIDEO CV ─── -->
+  <section id="video-cv" class="section">
+    <div class="container">
+      <p class="section-label">Video CV</p>
+      <h2 class="section-title">Video Introduction</h2>
+      <div class="video-cv">
+        <div class="video-cv-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <p>Your video CV will appear here. Add a YouTube, Vimeo, or Google Drive link and it will play inline.</p>
+          <span class="hint">Paste your link in the HTML source to embed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact" class="section">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <p class="label">Email</p>
+          <p class="value"><a href="mailto:albari2003@gmail.com">albari2003@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="label">Phone</p>
+          <p class="value"><a href="tel:+8801798907003">+880 1798 907 003</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="label">GitHub</p>
+          <p class="value"><a href="https://github.com/wahid-ski" target="_blank" rel="noopener">github.com/wahid-ski</a></p>
+        </div>
+        <div class="contact-item">
+          <p class="label">Location</p>
+          <p class="value">Dhaka, Bangladesh</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Albari Yasir Wahid</p>
+    </div>
+  </footer>
+
+  <script>
+    function handlePhotoError(img) {
+      img.onerror = null;
+      const fallback = document.createElement('div');
+      fallback.className = 'hero-photo hero-photo-fallback';
+      fallback.textContent = 'AW';
+      img.replaceWith(fallback);
+    }
+  </script>
+</body>
+</html>
